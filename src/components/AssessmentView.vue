@@ -50,25 +50,25 @@
   
   h1 {
     font-size: 2rem;
-    color: #6a11cb;
+    color: #000000;
     margin-bottom: 1rem;
   }
   
   h2 {
     font-size: 1.5rem;
-    color: #2575fc;
+    color: #000000;
     margin-top: 1.5rem;
   }
   
   p,
   ol {
     font-size: 1.1rem;
-    color: #333;
+    color: #000000;
     line-height: 1.5;
   }
   
   a {
-    color: #2575fc;
+    color: #000000;
     text-decoration: none;
   }
   
