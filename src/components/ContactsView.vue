@@ -29,48 +29,27 @@ export default {
 </script>
 
 <style scoped>
-.contacts-container {
+.contacts-view {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #ffffff, #f7f7f7);
-}
-
-.contacts-box {
-  background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  max-width: 800px;
-  width: 100%;
+  padding: 20px;
 }
 
 h1 {
-  font-size: 2rem;
-  color: #000000;
-  margin-bottom: 1rem;
-}
-
-h2 {
-  font-size: 1.5rem;
-  color: #000000;
-  margin-top: 1.5rem;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
 
 p {
-  font-size: 1.1rem;
-  color: #000000;
-  line-height: 1.5;
+  font-size: 1.5rem;
+  margin: 10px 0;
 }
 
-a {
-  color: #000000;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
 }
 </style>

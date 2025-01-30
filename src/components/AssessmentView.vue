@@ -30,59 +30,25 @@
   </script>
   
   <style scoped>
-  .assessment-container {
+  .assessment-view {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #ffffff, #f7f7f7);
-  }
-  
-  .assessment-box {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 600px;
-    width: 100%;
+    padding: 20px;
   }
   
   h1 {
-    font-size: 2rem;
-    color: #000000;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
   }
   
-  h2 {
+  p {
     font-size: 1.5rem;
-    color: #000000;
-    margin-top: 1.5rem;
+    margin: 10px 0;
   }
   
-  p,
-  ol {
-    font-size: 1.1rem;
-    color: #000000;
-    line-height: 1.5;
-  }
-  
-  a {
-    color: #000000;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  ol {
-    text-align: left;
-    margin-left: 1.5rem;
-  }
-  
-  li {
-    margin-bottom: 0.8rem;
+  address {
+    font-style: normal;
+    margin: 20px 0;
   }
   </style>
-  

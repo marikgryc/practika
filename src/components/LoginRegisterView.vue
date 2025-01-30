@@ -94,12 +94,12 @@
   font-weight: bold;
   border-bottom: 3px solid transparent;
   transition: all 0.3s ease;
-  color: #333;
+  color: #000000;
 }
 
 .toggle-buttons .active {
-  color: #6a11cb;
-  border-bottom: 3px solid #6a11cb;
+  color: #000000;
+  border-bottom: 3px solid #000000;
 }
 
 .form {
@@ -122,7 +122,7 @@ input:focus {
 }
 
 button {
-  background: #6a11cb;
+  background: #000000;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -134,7 +134,7 @@ button {
 }
 
 button:hover {
-  background: #2575fc;
+  background: #fc2525;
 }
 
 button:active {
