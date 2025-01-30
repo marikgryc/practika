@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <!-- Шапка з навігацією -->
+    
     <header class="header">
       <div class="container">
         <h1 class="logo">Антикварний магазин</h1>
@@ -18,11 +18,14 @@
       </div>
     </header>
 
-    <!-- Динамічний контент -->
+  
     <main>
       <router-view></router-view>
     </main>
   </div>
+  <footer class="footer">
+      <p>© Антикварний магазин 2025</p>
+    </footer>
 </template>
 
 <script>
@@ -33,7 +36,6 @@ export default {
 </script>
 
 <style>
-/* Основні стилі */
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -41,7 +43,7 @@ body {
   box-sizing: border-box;
 }
 
-/* Контейнер */
+
 .container {
   width: 90%;
   max-width: 1200px;
@@ -49,7 +51,7 @@ body {
   text-align: center;
 }
 
-/* Шапка */
+
 .header {
   background-color: #2c2c2c;
   color: white;
@@ -85,17 +87,27 @@ body {
   text-decoration: underline;
 }
 
-/* Основний контент */
+
 main {
   margin-top: 80px;
   padding: 20px;
 }
 
-/* Адаптивність */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 0.3rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   .nav {
     flex-direction: column;
     gap: 0.5rem;
   }
 }
+
 </style>
