@@ -18,9 +18,9 @@
     data() {
       return {
         catalog: [
-          { id: 1, title: "Старовинний годинник", description: "XIX століття, Франція", price: 5000, image: "https://via.placeholder.com/150" },
-          { id: 2, title: "Срібна ложка", description: "XVIII століття, Англія", price: 1200, image: "https://via.placeholder.com/150" },
-          { id: 3, title: "Картина маслом", description: "Початок XX століття", price: 8000, image: "https://via.placeholder.com/150" }
+          { id: 1, title: "Старовинний годинник", description: "XIX століття, Франція", price: 5000, image: require('@/assets/godini.png') },
+          { id: 2, title: "Срібна ложка", description: "XVIII століття, Англія", price: 1200, image: require("@/assets/loshka.jpg") },
+          { id: 3, title: "Картина маслом", description: "Початок XX століття", price: 8000, image: require("@/assets/kartina.jpg") }
         ]
       };
     }
