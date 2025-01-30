@@ -63,7 +63,7 @@
 .auth-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: first baseline;
   height: 100vh;
   background: linear-gradient(135deg, #ffffff, #f7f7f7);
 }
