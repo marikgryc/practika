@@ -31,7 +31,7 @@
   .grid {
     display: flex;
     gap: 1.5rem;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-wrap: wrap;
   }
   
