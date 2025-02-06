@@ -22,24 +22,20 @@ $result = $conn->query($sql);
 $products = [];
 
 if ($result->num_rows > 0) {
-    // Fetch data and store in an array
     while($row = $result->fetch_assoc()) {
         $products[] = [
             'id' => $row['product_ID'],
             'title' => $row['product_name'],
             'description' => $row['product_category'],
             'price' => $row['product_price'],
-            'image' => 'path_to_images/' . $row['product_name'] . '.jpg' // You can modify this to use actual image URLs
+            'image' => '/assets/catalogue/' . urlencode($row['image_filename']) 
         ];
     }
 }
 
-// Close connection
 $conn->close();
 
-// Set the content type to JSON
 header('Content-Type: application/json');
 
-// Output the products as JSON
 echo json_encode($products);
 ?>

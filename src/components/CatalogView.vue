@@ -27,7 +27,7 @@ export default {
     async fetchCatalog() {
       try {
         // Make the HTTP request to get the products data
-        const response = await fetch('http://localhost/Antique-shop/php/products.php'); // Update with your server path
+        const response = await fetch('http://localhost/Antique-shop/php/products.php');
 
         // Check if the response is OK (status 200)
         if (!response.ok) {
