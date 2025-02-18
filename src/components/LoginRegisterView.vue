@@ -1,65 +1,80 @@
 <template>
-    <div class="auth-container">
-      <div class="auth-box">
-        <div class="toggle-buttons">
-          <button :class="{ active: isLogin }" @click="isLogin = true">Увійти</button>
-          <button :class="{ active: !isLogin }" @click="isLogin = false">Реєстрація</button>
-        </div>
-  
-        <form v-if="isLogin" class="form" @submit.prevent="login">
-          <h2>Вхід</h2>
-          <input type="email" v-model="email" placeholder="Email" required />
-          <input type="password" v-model="password" placeholder="Пароль" required />
-          <button type="submit">Увійти</button>
-        </form>
-  
-        <form v-else class="form" @submit.prevent="register">
-          <h2>Реєстрація</h2>
-          <input type="text" v-model="name" placeholder="Ім'я" required />
-          <input type="email" v-model="email" placeholder="Email" required />
-          <input type="password" v-model="password" placeholder="Пароль" required />
-          <input type="password" v-model="confirmPassword" placeholder="Підтвердіть пароль" required />
-          <button type="submit">Зареєструватися</button>
-        </form>
+  <div class="auth-container">
+    <div class="auth-box">
+      <div class="toggle-buttons">
+        <button :class="{ active: isLogin }" @click="isLogin = true">Увійти</button>
+        <button :class="{ active: !isLogin }" @click="isLogin = false">Реєстрація</button>
       </div>
+
+      <form v-if="isLogin" class="form" @submit.prevent="login">
+        <h2>Вхід</h2>
+        <input type="email" v-model="email" placeholder="Email" required />
+        <input type="password" v-model="password" placeholder="Пароль" required />
+        <button type="submit">Увійти</button>
+      </form>
+
+      <form v-else class="form" @submit.prevent="register">
+        <h2>Реєстрація</h2>
+        <input type="text" v-model="name" placeholder="Ім'я" required />
+        <input type="email" v-model="email" placeholder="Email" required />
+        <input type="password" v-model="password" placeholder="Пароль" required />
+        <input type="password" v-model="confirmPassword" placeholder="Підтвердіть пароль" required />
+        <button type="submit">Зареєструватися</button>
+      </form>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        isLogin: true,
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      };
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      isLogin: true,
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    };
+  },
+  methods: {
+    async register() {
+      if (!this.name || !this.password || !this.confirmPassword) {
+        alert("Заповніть всі поля!");
+        return;
+      }
+      if (this.password !== this.confirmPassword) {
+        alert("Паролі не співпадають!");
+        return;
+      }
+
+      try {
+        const response = await fetch("http://localhost/Antique-shop/php/register.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: this.name,
+            password: this.password,
+          }),
+        });
+
+        const result = await response.json();
+        alert(result.message);
+
+        if (result.success) {
+          this.isLogin = true;
+        }
+      } catch (error) {
+        console.error("Помилка реєстрації:", error);
+        alert("Сталася помилка. Спробуйте ще раз.");
+      }
     },
-    methods: {
-      login() {
-        if (!this.email || !this.password) {
-          alert("Заповніть всі поля!");
-          return;
-        }
-        alert(`Успішний вхід: ${this.email}`);
-      },
-      register() {
-        if (!this.name || !this.email || !this.password || !this.confirmPassword) {
-          alert("Заповніть всі поля!");
-          return;
-        }
-        if (this.password !== this.confirmPassword) {
-          alert("Паролі не співпадають!");
-          return;
-        }
-        alert(`Акаунт створено: ${this.email}`);
-      },
-    },
-  };
-  </script>
-  
-  <style scoped>
+  },
+};
+</script>
+
+<style scoped>
 .auth-container {
   display: flex;
   justify-content: center;
