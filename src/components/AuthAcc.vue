@@ -85,7 +85,14 @@ export default {
     const result = response.data;
     if (result.success) {
       alert("Вхід успішний!");
-      localStorage.setItem("user_id", result.user_id); 
+
+      
+      localStorage.setItem("user_data", JSON.stringify({
+        user_id: result.user_id,
+        username: result.username,
+        email: this.email,
+      }));
+
       this.$router.push("/account");
     } else {
       alert(result.message);
@@ -94,6 +101,7 @@ export default {
     console.error("Помилка входу:", error);
     alert("Сталася помилка. Спробуйте ще раз.");
   }
+
     },
   },
 };
@@ -103,7 +111,7 @@ export default {
 .auth-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items:first baseline;
   height: 100vh;
   background: linear-gradient(135deg, #ffffff, #f7f7f7);
 }

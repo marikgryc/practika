@@ -12,8 +12,8 @@
             <li><router-link to="/assessment">Оцінка старовинного майна</router-link></li>
             <li><router-link to="/about">Про нас</router-link></li>
             <li><router-link to="/contacts">Контакти</router-link></li>
+            <li><router-link to="/account">Особистий кабінет</router-link></li>
             <li><router-link to="/auth">Увійти / Реєстрація</router-link></li>
-
           </ul>
         </nav>
       </div>
