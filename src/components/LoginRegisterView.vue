@@ -6,6 +6,7 @@
         <button :class="{ active: !isLogin }" @click="isLogin = false">Реєстрація</button>
       </div>
 
+      <!-- Форма входу -->
       <form v-if="isLogin" class="form" @submit.prevent="login">
         <h2>Вхід</h2>
         <input type="email" v-model="email" placeholder="Email" required />
@@ -13,6 +14,7 @@
         <button type="submit">Увійти</button>
       </form>
 
+      <!-- Форма реєстрації -->
       <form v-else class="form" @submit.prevent="register">
         <h2>Реєстрація</h2>
         <input type="text" v-model="name" placeholder="Ім'я" required />
@@ -38,7 +40,7 @@ export default {
   },
   methods: {
     async register() {
-      if (!this.name || !this.password || !this.confirmPassword) {
+      if (!this.name || !this.email || !this.password || !this.confirmPassword) {
         alert("Заповніть всі поля!");
         return;
       }
@@ -55,6 +57,7 @@ export default {
           },
           body: JSON.stringify({
             name: this.name,
+            email: this.email,
             password: this.password,
           }),
         });
@@ -67,6 +70,40 @@ export default {
         }
       } catch (error) {
         console.error("Помилка реєстрації:", error);
+        alert("Сталася помилка. Спробуйте ще раз.");
+      }
+    },
+
+    async login() {
+      if (!this.email || !this.password) {
+        alert("Заповніть всі поля!");
+        return;
+      }
+
+      
+      try {
+        const response = await fetch("http://localhost/Antique-shop/php/login.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: this.email,
+            password: this.password,
+          }),
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert("Вхід успішний!");
+      
+          localStorage.setItem("user_id", result.user_id); 
+          this.$router.push({ name: "account" }); 
+        } else {
+          alert(result.message);
+        }
+      } catch (error) {
+        console.error("Помилка входу:", error);
         alert("Сталася помилка. Спробуйте ще раз.");
       }
     },
