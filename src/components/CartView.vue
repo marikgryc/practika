@@ -1,124 +1,104 @@
 <template>
-    <div class="cart-container">
-      <h1>Кошик</h1>
-  
-      <div v-if="cart.length > 0">
-        <div v-for="(item, index) in cart" :key="index" class="cart-item">
-          <img :src="item.image" :alt="item.name" class="cart-image" />
-          <div class="cart-details">
-            <h2>{{ item.name }}</h2>
-            <p>Ціна: {{ item.price }} грн</p>
-            <div class="quantity-controls">
-              <button @click="decreaseQuantity(index)">-</button>
-              <span>{{ item.quantity }}</span>
-              <button @click="increaseQuantity(index)">+</button>
-            </div>
-            <button class="remove-button" @click="removeFromCart(index)">Видалити</button>
-          </div>
+  <div>
+    <h1>Кошик</h1>
+
+    <div v-if="cart.length > 0">
+      <div v-for="item in cart" :key="item.id" class="cart-item">
+        <img :src="item.image" :alt="item.title" class="cart-img">
+        <div class="item-details">
+          <h3>{{ item.title }}</h3>
+          <p>Ціна: {{ item.price }} грн</p>
+          <p>Кількість: 
+            <button @click="decreaseQuantity(item)">-</button>
+            {{ item.quantity }}
+            <button @click="increaseQuantity(item)">+</button>
+          </p>
+          <button @click="removeFromCart(item)">Видалити</button>
         </div>
-  
-        <h2>Загальна сума: {{ totalPrice }} грн</h2>
-        <button class="clear-cart" @click="clearCart">Очистити кошик</button>
-        <button class="checkout">Оформити замовлення</button>
       </div>
-  
-      <p v-else>Кошик порожній</p>
+
+      <h2>Загальна сума: {{ totalPrice }} грн</h2>
+      <router-link to="/checkout" class="btn">Оформити замовлення</router-link>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        cart: JSON.parse(localStorage.getItem("cart")) || [],
-      };
+
+    <p v-else>Кошик порожній.</p>
+    <router-link to="/catalog" class="btn">Повернутись до каталогу</router-link>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      cart: []
+    };
+  },
+  computed: {
+    totalPrice() {
+      return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    }
+  },
+  created() {
+    this.loadCart();
+  },
+  methods: {
+    loadCart() {
+      this.cart = JSON.parse(localStorage.getItem("cart")) || [];
     },
-    computed: {
-      totalPrice() {
-        return this.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-      },
+    removeFromCart(item) {
+      this.cart = this.cart.filter(i => i.id !== item.id);
+      localStorage.setItem("cart", JSON.stringify(this.cart));
     },
-    methods: {
-      increaseQuantity(index) {
-        this.cart[index].quantity++;
-        this.saveCart();
-      },
-      decreaseQuantity(index) {
-        if (this.cart[index].quantity > 1) {
-          this.cart[index].quantity--;
-        } else {
-          this.removeFromCart(index);
-        }
-        this.saveCart();
-      },
-      removeFromCart(index) {
-        this.cart.splice(index, 1);
-        this.saveCart();
-      },
-      clearCart() {
-        this.cart = [];
-        this.saveCart();
-      },
-      saveCart() {
-        localStorage.setItem("cart", JSON.stringify(this.cart));
-      },
+    increaseQuantity(item) {
+      item.quantity++;
+      localStorage.setItem("cart", JSON.stringify(this.cart));
     },
-  };
-  </script>
-  
-  <style scoped>
-  .cart-container {
-    padding: 20px;
+    decreaseQuantity(item) {
+      if (item.quantity > 1) {
+        item.quantity--;
+      } else {
+        this.removeFromCart(item);
+      }
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+    }
   }
-  
-  .cart-item {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-    padding: 10px;
-  }
-  
-  .cart-image {
-    width: 100px;
-    height: auto;
-    margin-right: 20px;
-  }
-  
-  .cart-details {
-    flex-grow: 1;
-  }
-  
-  .quantity-controls {
-    display: flex;
-    align-items: center;
-  }
-  
-  .quantity-controls button {
-    width: 30px;
-    height: 30px;
-    font-size: 18px;
-    border: none;
-    background-color: #6a11cb;
-    color: white;
-    cursor: pointer;
-    margin: 0 5px;
-  }
-  
-  .remove-button, .clear-cart, .checkout {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .clear-cart {
-    background-color: #ff9900;
-  }
-  
-  .checkout {
-    background-color: #28a745;
-  }
-  </style>
-  
+};
+</script>
+
+<style scoped>
+.cart-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.cart-img {
+  width: 100px;
+  height: auto;
+  margin-right: 15px;
+}
+
+.item-details {
+  flex-grow: 1;
+}
+
+button {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #000000;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.btn:hover {
+  background-color: #2575fc;
+}
+</style>
