@@ -3,6 +3,9 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
@@ -16,24 +19,24 @@ if ($conn->connect_error) {
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-if (!$data || empty($data['name']) || empty($data['password'])) {
+if (empty($data['name']) || empty($data['email']) || empty($data['password'])) {
     echo json_encode(["success" => false, "message" => "Заповніть всі поля"]);
     exit;
 }
 
-$checkStmt = $conn->prepare("SELECT * FROM login WHERE Username = ?");
-$checkStmt->bind_param("s", $data['name']);
+$checkStmt = $conn->prepare("SELECT * FROM login WHERE Username = ? OR Email = ?");
+$checkStmt->bind_param("ss", $data['name'], $data['email']);
 $checkStmt->execute();
 $result = $checkStmt->get_result();
 if ($result->num_rows > 0) {
-    echo json_encode(["success" => false, "message" => "Користувач вже існує"]);
+    echo json_encode(["success" => false, "message" => "Користувач з таким ім'ям або email вже існує"]);
     exit;
 }
 $checkStmt->close();
 
-$stmt = $conn->prepare("INSERT INTO login (Username, Password) VALUES (?, ?)");
-$stmt->bind_param("ss", $data['name'], $data['password']);
-
+$stmt = $conn->prepare("INSERT INTO login (Username, Email, Password) VALUES (?, ?, ?)");
+$stmt->bind_param("sss", $data['name'], $data['email'], $data['password']);
+    
 if ($stmt->execute()) {
     echo json_encode(["success" => true, "message" => "Реєстрація успішна!"]);
 } else {

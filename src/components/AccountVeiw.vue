@@ -1,59 +1,41 @@
 <template>
-    <div class="account-container">
-      <div class="account-box">
-        <h2>Особистий кабінет</h2>
-        <p>Ім'я користувача: {{ user.username }}</p>
-        <p>Email: {{ user.email }}</p>
-  
+  <div class="account-container">
+    <div class="account-box">
+      <h2>Особистий кабінет</h2>
+      <div class="account-info">
+        <p><strong>Ім'я користувача:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Дата реєстрації:</strong> {{ user.registrationDate }}</p>
+      </div>
+      <div class="account-actions">
         <button @click="logout">Вийти</button>
       </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        user: {
-          username: "",
-          email: "",
-        },
-      };
-    },
-    created() {
-      const userId = localStorage.getItem("user_id");
-  
-      if (!userId) {
-        this.$router.push({ name: "login" }); 
-      }
-  
-      this.fetchUserData(userId);
-    },
-    methods: {
-      async fetchUserData(userId) {
-        try {
-          const response = await fetch(`http://localhost/Antique-shop/php/getUserData.php?id=${userId}`);
-          const data = await response.json();
-  
-          if (data.success) {
-            this.user.username = data.username;
-            this.user.email = data.email;
-          } else {
-            alert(data.message);
-          }
-        } catch (error) {
-          console.error("Помилка при отриманні даних користувача:", error);
-        }
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      user: {
+        name: "Іван Іванов", // Отримуєте з сервера після логіну
+        email: "ivan@example.com", // Отримуєте з сервера після логіну
+        registrationDate: "2025-02-01", // Отримуєте з сервера після логіну
       },
-      logout() {
-        localStorage.removeItem("user_id"); 
-        this.$router.push({ name: "login" }); 
-      },
+    };
+  },
+  methods: {
+    logout() {
+      // Логіка для виходу з кабінету, видалення даних з localStorage
+      localStorage.removeItem("user_id");
+      this.$router.push({ name: "login" }); // Перенаправлення на сторінку логіну
     },
-  };
-  </script>
-  
-  <style scoped>
+  },
+};
+</script>
+
+<style scoped>
 .account-container {
   display: flex;
   justify-content: center;
@@ -114,4 +96,3 @@ button:active {
   transform: scale(0.98);
 }
 </style>
-  

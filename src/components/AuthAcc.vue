@@ -9,18 +9,18 @@
       <!-- Форма входу -->
       <form v-if="isLogin" class="form" @submit.prevent="login">
         <h2>Вхід</h2>
-        <input type="email" v-model="email" placeholder="Email" required />
-        <input type="password" v-model="password" placeholder="Пароль" required />
+        <input type="email" v-model="email" placeholder="Email" required autocomplete="email" />
+        <input type="password" v-model="password" placeholder="Пароль" required autocomplete="current-password" />
         <button type="submit">Увійти</button>
       </form>
 
       <!-- Форма реєстрації -->
       <form v-else class="form" @submit.prevent="register">
         <h2>Реєстрація</h2>
-        <input type="text" v-model="name" placeholder="Ім'я" required />
-        <input type="email" v-model="email" placeholder="Email" required />
-        <input type="password" v-model="password" placeholder="Пароль" required />
-        <input type="password" v-model="confirmPassword" placeholder="Підтвердіть пароль" required />
+        <input type="text" v-model="name" placeholder="Ім'я" required autocomplete="name" />
+        <input type="email" v-model="email" placeholder="Email" required autocomplete="email" />
+        <input type="password" v-model="password" placeholder="Пароль" required autocomplete="new-password" />
+        <input type="password" v-model="confirmPassword" placeholder="Підтвердіть пароль" required autocomplete="new-password" />
         <button type="submit">Зареєструватися</button>
       </form>
     </div>
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -50,23 +52,17 @@ export default {
       }
 
       try {
-        const response = await fetch("http://localhost/Antique-shop/php/register.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: this.name,
-            email: this.email,
-            password: this.password,
-          }),
+        const response = await axios.post("http://localhost/Antique-shop/php/register.php", {
+          name: this.name,
+          email: this.email,
+          password: this.password,
         });
 
-        const result = await response.json();
+        const result = response.data;
         alert(result.message);
 
         if (result.success) {
-          this.isLogin = true;
+          this.isLogin = true; 
         }
       } catch (error) {
         console.error("Помилка реєстрації:", error);
@@ -75,37 +71,29 @@ export default {
     },
 
     async login() {
-      if (!this.email || !this.password) {
-        alert("Заповніть всі поля!");
-        return;
-      }
+  if (!this.email || !this.password) {
+    alert("Заповніть всі поля!");
+    return;
+  }
 
-      
-      try {
-        const response = await fetch("http://localhost/Antique-shop/php/login.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: this.email,
-            password: this.password,
-          }),
-        });
+  try {
+    const response = await axios.post("http://localhost/Antique-shop/php/login.php", {
+      email: this.email,
+      password: this.password,
+    });
 
-        const result = await response.json();
-        if (result.success) {
-          alert("Вхід успішний!");
-      
-          localStorage.setItem("user_id", result.user_id); 
-          this.$router.push({ name: "account" }); 
-        } else {
-          alert(result.message);
-        }
-      } catch (error) {
-        console.error("Помилка входу:", error);
-        alert("Сталася помилка. Спробуйте ще раз.");
-      }
+    const result = response.data;
+    if (result.success) {
+      alert("Вхід успішний!");
+      localStorage.setItem("user_id", result.user_id); 
+      this.$router.push("/account");
+    } else {
+      alert(result.message);
+    }
+  } catch (error) {
+    console.error("Помилка входу:", error);
+    alert("Сталася помилка. Спробуйте ще раз.");
+  }
     },
   },
 };
@@ -115,7 +103,7 @@ export default {
 .auth-container {
   display: flex;
   justify-content: center;
-  align-items: first baseline;
+  align-items: center;
   height: 100vh;
   background: linear-gradient(135deg, #ffffff, #f7f7f7);
 }
@@ -187,7 +175,7 @@ button {
 
 button:hover {
   background: #000000;
-  color: white; 
+  color: white;
 }
 
 button:active {
