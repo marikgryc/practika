@@ -8,6 +8,8 @@
         <h3>{{ item.title }}</h3>
         <p>{{ item.description }}</p>
         <span class="price">{{ item.price }} грн</span>
+        <span class="author">{{ item.author }} </span>
+        <span class="from">{{ item.from }} </span>
         <button @click="addToCart(item)">Додати в кошик</button>
       </div>
     </div>
@@ -84,7 +86,16 @@ export default {
   font-weight: bold;
   margin-top: 10px;
 }
-
+.author {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.from {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+}
 button {
   background-color: #000000;
   color: white;

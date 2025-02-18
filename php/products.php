@@ -26,6 +26,8 @@ if ($result->num_rows > 0) {
         $products[] = [
             'id' => $row['product_ID'],
             'title' => $row['product_name'],
+            'author' => $row['product_author'],
+            'from' => $row['from_era'],
             'description' => $row['product_category'],
             'price' => $row['product_price'],
             'image' => '/assets/catalogue/' . urlencode($row['image_filename']) 
