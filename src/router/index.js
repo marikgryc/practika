@@ -5,9 +5,12 @@ import LoginRegisterView from '../components/LoginRegisterView.vue';
 import AboutUs from '../components/AboutUs.vue';
 import ContactsView from '../components/ContactsView.vue';
 import AssessmentView from '../components/AssessmentView.vue';
+import CartView from '@/components/CartView.vue';
+
 const routes = [
   { path: '/', component: HomeView },
   { path: '/catalog', component: CatalogView },
+  { path: '/cart', component: CartView },
   { path: '/auth', component: LoginRegisterView },
   { path: '/about', component: AboutUs },
   { path: '/contacts', component: ContactsView },
