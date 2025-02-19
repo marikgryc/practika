@@ -21,7 +21,6 @@ if (!$data || empty($data['cart'])) {
     exit;
 }
 
-// Додаємо клієнта в базу
 $stmt = $conn->prepare("INSERT INTO clients (client_name, client_surname, client_address, client_number) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("ssss", $data['name'], $data['surname'], $data['address'], $data['phone']);
 if (!$stmt->execute()) {
@@ -31,7 +30,7 @@ if (!$stmt->execute()) {
 $clientID = $stmt->insert_id;
 $stmt->close();
 
-// Додаємо замовлення для кожного товару в кошику
+
 $stmt = $conn->prepare("INSERT INTO orders (product_ID, client_ID, order_day) VALUES (?, ?, NOW())");
 
 foreach ($data['cart'] as $item) {

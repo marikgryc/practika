@@ -10,6 +10,7 @@
         <span class="price">{{ item.price }} грн</span>
         <span class="author">{{ item.author }} </span>
         <span class="from">{{ item.from }} </span>
+        <span class="material">{{ item.material }} </span>
         <button @click="addToCart(item)">Додати в кошик</button>
       </div>
     </div>
@@ -90,6 +91,11 @@ export default {
   margin-top: 10px;
 }
 .from {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.material {
   display: block;
   font-weight: bold;
   margin-top: 10px;

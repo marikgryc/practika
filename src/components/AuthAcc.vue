@@ -147,7 +147,7 @@ export default {
 
 .toggle-buttons .active {
   color: #000000;
-  border-bottom: 3px solid #000000;
+  border-bottom: 3px solid #5a3826;
 }
 
 .form {
@@ -170,7 +170,7 @@ input:focus {
 }
 
 button {
-  background: #000000;
+  background: #5a3826;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -182,7 +182,7 @@ button {
 }
 
 button:hover {
-  background: #000000;
+  background: #5a3826;
   color: white;
 }
 

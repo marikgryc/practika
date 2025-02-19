@@ -29,7 +29,7 @@
         const userData = JSON.parse(localStorage.getItem("user_data"));
   
         if (!userData || !userData.user_id) {
-          this.$router.push("/auth"); // ❌ Якщо немає сесії → перенаправляємо на вхід
+          this.$router.push("/auth"); 
         } else {
           this.userId = userData.user_id;
           this.username = userData.username;
@@ -37,8 +37,8 @@
         }
       },
       logout() {
-        localStorage.removeItem("user_data"); // Видаляємо сесію
-        this.$router.push("/auth"); // Перекидаємо на сторінку входу
+        localStorage.removeItem("user_data"); 
+        this.$router.push("/auth"); 
       },
     },
   };
@@ -71,7 +71,7 @@
   }
   
   .logout-btn {
-    background: #000000;
+    background: #5a3826;
     color: white;
     padding: 10px 15px;
     border: none;

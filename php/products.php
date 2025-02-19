@@ -32,6 +32,7 @@ if ($result->num_rows > 0) {
             'author' => $row['product_author'],
             'from' => $row['from_era'],
             'description' => $row['product_category'],
+            'material' => $row['product_material'],
             'price' => $row['product_price'],
             'image' => '/assets/catalogue/' . urlencode($row['image_filename']) 
         ];
