@@ -115,7 +115,7 @@
   
   button {
     margin-top: 20px;
-    background: #6a11cb;
+    background: #5a3826;
     color: white;
     padding: 10px;
     border: none;
@@ -124,7 +124,8 @@
   }
   
   button:hover {
-    background: #2575fc;
+    background: #000000;
   }
+  
   </style>
   

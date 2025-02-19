@@ -1,6 +1,5 @@
 <template>
   <div class="home-container">
-    <!-- Шапка -->
     <header class="hero-section">
       <h1>Ласкаво просимо в Антикварний магазин "Історія"</h1>
       <p>Найдокладніша колекція старовинних предметів для вашого дому та колекцій.</p>
@@ -8,8 +7,6 @@
         <button class="btn-primary">Переглянути каталог</button>
       </router-link>
     </header>
-
-    <!-- Наші послуги -->
     <section class="services">
       <h2>Наші послуги</h2>
       <div class="services-grid">

@@ -15,6 +15,7 @@
     </div>
     <router-link to="/" class="btn">Назад</router-link>
   </div>
+  
 </template>
 
 <script>
@@ -25,20 +26,18 @@ export default {
     };
   },
   created() {
-    this.fetchCatalog();
+    this.fetchProducts();
   },
   methods: {
-    async fetchCatalog() {
-      try {
-        const response = await fetch('http://localhost/Antique-shop/php/products.php');
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const productsData = await response.json();
-        this.catalog = productsData;
-      } catch (error) {
-        console.error('Помилка при завантаженні каталогу:', error);
-      }
+    async fetchProducts() {
+    try {
+        const response = await fetch("http://localhost/Antique-shop/php/products.php");
+        this.catalog = await response.json(); 
+        console.log("Завантажені товари:", this.catalog);
+    } catch (error) {
+        console.error("Помилка завантаження товарів:", error);
+    }
+
     },
     addToCart(product) {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -123,4 +122,5 @@ button:hover {
 .btn:hover {
   background-color: #000000;
 }
+
 </style>
