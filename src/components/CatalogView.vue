@@ -13,9 +13,7 @@
         <button @click="addToCart(item)">Додати в кошик</button>
       </div>
     </div>
-
-    <router-link to="/cart" class="btn">Перейти в кошик </router-link>
-    <router-link to="/" class="btn">Повернутись на головну</router-link>
+    <router-link to="/" class="btn">Назад</router-link>
   </div>
 </template>
 
@@ -65,6 +63,7 @@ export default {
   gap: 1.5rem;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  align-items: flex-end;
 }
 
 .card {
@@ -97,7 +96,7 @@ export default {
   margin-top: 10px;
 }
 button {
-  background-color: #000000;
+  background-color: #5a3826;
   color: white;
   border: none;
   padding: 10px;
@@ -107,21 +106,21 @@ button {
 }
 
 button:hover {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #000000;
+  color: #ffffff;
 }
 
 .btn {
   display: inline-block;
   margin-top: 20px;
   padding: 10px 15px;
-  background-color: #000000;
+  background-color: #5a3826;
   color: white;
   text-decoration: none;
   border-radius: 5px;
 }
 
 .btn:hover {
-  background-color: #2575fc;
+  background-color: #000000;
 }
 </style>

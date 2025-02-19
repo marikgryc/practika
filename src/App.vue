@@ -9,7 +9,6 @@
             <li><router-link to="/">Головна</router-link></li>
             <li><router-link to="/catalog">Каталог</router-link></li>
             <li><router-link to="/cart">Кошик</router-link></li>
-            <li><router-link to="/assessment">Оцінка старовинного майна</router-link></li>
             <li><router-link to="/about">Про нас</router-link></li>
             <li><router-link to="/contacts">Контакти</router-link></li>
             <li><router-link to="/account">Особистий кабінет</router-link></li>
@@ -54,7 +53,7 @@ body {
 
 
 .header {
-  background-color: #2c2c2c;
+  background-color: #5a3826;
   color: white;
   padding: 1rem 0;
   position: fixed;
@@ -95,7 +94,7 @@ main {
 }
 
 .footer {
-  background-color: #333;
+  background-color: #5a3826;
   color: white;
   text-align: center;
   padding: 0.3rem;

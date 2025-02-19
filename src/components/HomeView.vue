@@ -12,17 +12,19 @@
     <!-- Наші послуги -->
     <section class="services">
       <h2>Наші послуги</h2>
-      <div class="service-card">
-        <h3>Оцінка старовинних предметів</h3>
-        <p>Надаємо професійну оцінку старовинних предметів для продажу або колекцій.</p>
-      </div>
-      <div class="service-card">
-        <h3>Продаж антикваріату</h3>
-        <p>Пропонуємо широкий вибір старовинних меблів, картин, ювелірних виробів та інших предметів.</p>
-      </div>
-      <div class="service-card">
-        <h3>Консультації з експертами</h3>
-        <p>Консультації з експертами по всіх питаннях щодо антикваріату, інвестицій та реставрації.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Оцінка старовинних предметів</h3>
+          <p>Надаємо професійну оцінку старовинних предметів для продажу або колекцій.</p>
+        </div>
+        <div class="service-card">
+          <h3>Продаж антикваріату</h3>
+          <p>Пропонуємо широкий вибір старовинних меблів, картин, ювелірних виробів та інших предметів.</p>
+        </div>
+        <div class="service-card">
+          <h3>Консультації з експертами</h3>
+          <p>Консультації з експертами по всіх питаннях щодо антикваріату, інвестицій та реставрації.</p>
+        </div>
       </div>
     </section>
   </div>
@@ -41,7 +43,7 @@ export default {
 
 .hero-section {
   background-color: #ffffff;
-  color: rgb(0, 0, 0);
+  color: #5a3826;
   text-align: center;
   padding: 3rem 1rem;
 }
@@ -56,7 +58,7 @@ export default {
 }
 
 .hero-section .btn-primary {
-  background-color: #000000;
+  background-color: #5a3826;
   color: white;
   padding: 1rem 2rem;
   border: none;
@@ -71,22 +73,39 @@ export default {
 }
 
 .services {
-  display: flex;
-  justify-content: space-around;
+  text-align: center;
   padding: 3rem 1rem;
-  background-color: #ffffff;
+  background-color: #f5ede2;
+}
+
+.services h2 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #5a3826;
+}
+
+.services-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .service-card {
-  text-align: center;
-  width: 30%;
-  padding: 1rem;
-  background-color: #f0f0f0;
+  flex: 1 1 300px;
+  max-width: 320px;
+  padding: 1.5rem;
+  background-color: #fff;
   border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .service-card h3 {
   font-size: 1.5rem;
-  color: #000000;
+  color: #5a3826;
+  margin-bottom: 1rem;
 }
 </style>
