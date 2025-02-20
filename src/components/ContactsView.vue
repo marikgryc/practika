@@ -8,22 +8,22 @@
       </p>
 
       <div class="contact-item">
-        <h2>📞 Телефон</h2>
+        <h2> Телефон</h2>
         <p><a href="tel:+380000000">+380 00 000 0000</a></p>
       </div>
 
       <div class="contact-item">
-        <h2>📧 Email</h2>
+        <h2> Email</h2>
         <p><a href="mailto:info@antiqueshop.com">info@antiqueshop.com</a></p>
       </div>
 
       <div class="contact-item">
-        <h2>📍 Адреса</h2>
+        <h2> Адреса</h2>
         <p>м. Коломия, вул. Антона Чехова, 20</p>
       </div>
 
       <div class="social-links">
-        <h2>🔗 Соціальні мережі</h2>
+        <h2> Соціальні мережі</h2>
         <a href="https://www.facebook.com" target="_blank" class="social-btn facebook">Facebook</a>
         <a href="https://www.instagram.com" target="_blank" class="social-btn instagram">Instagram</a>
       </div>
@@ -43,7 +43,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #f3e7d9, #e5c1a0);
+  background: #ffffff;
 }
 
 .contacts-box {

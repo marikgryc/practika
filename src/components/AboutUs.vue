@@ -57,7 +57,7 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 40px;
-  background-color: #ede7e3;
+  background-color: #ffffff;
   font-family: 'Georgia', serif;
 }
 
