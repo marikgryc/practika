@@ -8,6 +8,8 @@ import CartView from '../components/CartView.vue';
 import CheckoutView from '../components/CheckoutView.vue'
 import AccOunt from '@/components/AccOunt.vue';
 import ReviewsView from '@/components/ReviewsView.vue';
+import AdMin from '@/components/AdMin.vue';
+import AddProduct from '@/components/AddProduct.vue';
 
 const routes = [
   { path: '/', component: HomeView },
@@ -18,7 +20,21 @@ const routes = [
   { path: '/contacts', component: ContactsView },
   { path: '/checkout', component: CheckoutView },
   { path: '/account', component: AccOunt},
-  {path: '/reviews', component: ReviewsView}
+  { path: '/reviews', component: ReviewsView},
+  { 
+    path: '/admin', 
+    component: AdMin, 
+    beforeEnter: (to, from, next) => {
+      const user = JSON.parse(localStorage.getItem("user_data"));
+      if (user && user.role === "admin") {
+        next();
+      } else {
+        alert("Доступ заборонено!");
+        next("/");
+      }
+    }
+  },
+  { path: '/add-product', component: AddProduct }
 ];
 
 const router = createRouter({

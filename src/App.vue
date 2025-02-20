@@ -1,39 +1,62 @@
 <template>
   <div id="app">
-    
     <header class="header">
       <div class="container">
         <h1 class="logo">Антикварний магазин</h1>
         <nav>
           <ul class="nav">
-            <li><router-link to="/">Головна</router-link></li>
-            <li><router-link to="/catalog">Каталог</router-link></li>
-            <li><router-link to="/cart">Кошик</router-link></li>
-            <li><router-link to="/about">Про нас</router-link></li>
-            <li><router-link to="/contacts">Контакти</router-link></li>
-            <li><router-link to="/reviews">Відгуки</router-link></li>
-            <li><router-link to="/account">Особистий кабінет</router-link></li>
-            <li><router-link to="/auth">Увійти / Реєстрація</router-link></li>
-          </ul>
+              <li><router-link to="/">Головна</router-link></li>
+              <li><router-link to="/catalog">Каталог</router-link></li>
+              <li><router-link to="/cart">Кошик</router-link></li>
+              <li><router-link to="/about">Про нас</router-link></li>
+              <li><router-link to="/contacts">Контакти</router-link></li>
+              <li><router-link to="/reviews">Відгуки</router-link></li>
+              <li><router-link to="/account">Особистий кабінет</router-link></li>
+              <li v-if="!user">
+              <router-link to="/auth">Увійти / Реєстрація</router-link>
+              </li>
+              <li v-if="user && user.role === 'admin'">
+              <router-link to="/admin">Адмін-панель</router-link>
+              </li>
+  <li v-if="user">
+    <a href="#" @click="logout">Вийти</a>
+  </li>
+</ul>
         </nav>
       </div>
     </header>
 
-
     <main>
       <router-view></router-view>
     </main>
-  </div>
-  <footer class="footer">
+
+    <footer class="footer">
       <p>© Антикварний магазин 2025</p>
     </footer>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "App"
+  data() {
+    return {
+      user: null
+    };
+  },
+  mounted() {
+    const storedUser = localStorage.getItem("user_data");
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+    }
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem("user_data");
+      this.user = null;
+      this.$router.push("/auth");
+    }
+  }
 };
-
 </script>
 
 <style>
@@ -44,14 +67,12 @@ body {
   box-sizing: border-box;
 }
 
-
 .container {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
 }
-
 
 .header {
   background-color: #5a3826;
@@ -88,7 +109,6 @@ body {
   text-decoration: underline;
 }
 
-
 main {
   margin-top: 80px;
   padding: 20px;
@@ -110,5 +130,4 @@ main {
     gap: 0.5rem;
   }
 }
-
 </style>

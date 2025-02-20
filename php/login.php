@@ -12,8 +12,6 @@ $username = "root";
 $password = "";
 $dbname = "antique";
 
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
@@ -26,11 +24,8 @@ if (empty($data['email']) || empty($data['password'])) {
     die(json_encode(["success" => false, "message" => "Заповніть всі поля"]));
 }
 
-$stmt = $conn->prepare("SELECT id, Password FROM login WHERE Email = ?");
-if (!$stmt) {
-    die(json_encode(["success" => false, "message" => "Помилка запиту: " . $conn->error]));
-}
-
+// Отримуємо користувача з БД (ВИПРАВЛЕНО `Password`)
+$stmt = $conn->prepare("SELECT id, Username, Password, role FROM login WHERE Email = ?");
 $stmt->bind_param("s", $data['email']);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -39,16 +34,19 @@ if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
 
     if ($data['password'] === $user['Password']) {
-        die(json_encode([
+        echo json_encode([
             "success" => true,
             "message" => "Вхід успішний!",
-            "user_id" => $user['id']
-        ]));
+            "user_id" => $user['id'],
+            "username" => $user['Username'],
+            "email" => $data['email'],
+            "role" => $user['role']
+        ]);
     } else {
-        die(json_encode(["success" => false, "message" => "Невірний пароль"]));
+        echo json_encode(["success" => false, "message" => "Невірний пароль"]);
     }
 } else {
-    die(json_encode(["success" => false, "message" => "Користувача не знайдено"]));
+    echo json_encode(["success" => false, "message" => "Користувача не знайдено"]);
 }
 
 $stmt->close();

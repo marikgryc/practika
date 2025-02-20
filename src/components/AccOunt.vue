@@ -1,8 +1,8 @@
 <template>
     <div class="account-container">
       <h2>Особистий кабінет</h2>
-      <p>Вітаємо{{ username }}!</p>
-  
+      <p>Вітаємо {{ username }}!</p>
+      
       <div class="user-info">
         <p><strong>Email:</strong> {{ email }}</p>
         <p><strong>ID:</strong> {{ userId }}</p>

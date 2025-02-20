@@ -56,6 +56,7 @@ export default {
           name: this.name,
           email: this.email,
           password: this.password,
+          role: "user", // Додаємо роль user за замовчуванням
         });
 
         const result = response.data;
@@ -82,20 +83,21 @@ export default {
       password: this.password,
     });
 
-    const result = response.data;
-    if (result.success) {
+    console.log("Отримана відповідь сервера:", response.data); // Додано для налагодження
+
+    if (response.data.success) {
       alert("Вхід успішний!");
 
-      
       localStorage.setItem("user_data", JSON.stringify({
-        user_id: result.user_id,
-        username: result.username,
+        user_id: response.data.user_id,
+        username: response.data.username,
         email: this.email,
+        role: response.data.role, // Переконайтеся, що це не undefined
       }));
 
       this.$router.push("/account");
     } else {
-      alert(result.message);
+      alert(response.data.message);
     }
   } catch (error) {
     console.error("Помилка входу:", error);
@@ -106,7 +108,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .auth-container {
   display: flex;

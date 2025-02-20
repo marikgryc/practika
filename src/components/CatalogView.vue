@@ -51,7 +51,7 @@ export default {
       }
 
       localStorage.setItem("cart", JSON.stringify(cart));
-      alert("Товар додано в кошик!");
+      
     }
   }
 };
